@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #222;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #fff;
+        }
+        
+        .countdown-container {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        .countdown-timer {
+            font-size: 48px;
+            font-weight: bold;
+            color: #f39c12;
+            margin-bottom: 20px;
+            animation: slideIn 1s ease forwards;
+        }
+        
+        .countdown-label {
+            font-size: 24px;
+            color: #ddd;
+            animation: fadeIn 1s ease forwards;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <div class="countdown-container">
+        <div class="countdown-timer" id="countdown"></div>
+        <div class="countdown-label">until 2025</div>
+    </div>
+
+    <script>
+        const targetDate = new Date('2025-01-01T00:00:00')
+
+        function updateCountdown(){
+            const currentDate = new Date();
+
+            const timeDifference = targetDate - currentDate
+
+            const days = Math.floor(timeDifference/(1000 * 60 * 60 * 24))
+
+            const hours = Math.floor((timeDifference%(1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+
+            const minutes = Math.floor((timeDifference%(1000 * 60 * 60))/(1000 * 60))
+
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000)
+
+            document.getElementById('countdown').innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`
+
+            setTimeout(updateCountdown,1000)
+        }
+
+        updateCountdown()
+    </script>
+</body>
+</html>
